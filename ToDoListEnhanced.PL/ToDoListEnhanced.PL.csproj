@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Ninject" Version="3.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToDoListEnhanced.BLL\ToDoListEnhanced.BLL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="CodeTemplates\EFModelFromDatabase\Context.cs.t4">
+      <Generator></Generator>
+    </None>
+    <None Update="CodeTemplates\EFModelFromDatabase\EntityType.cs.t4">
+      <Generator></Generator>
+    </None>
+  </ItemGroup>
+
+</Project>

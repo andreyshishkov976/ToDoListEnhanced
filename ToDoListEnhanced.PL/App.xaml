@@ -1,0 +1,27 @@
+﻿<Application x:Class="ToDoListEnhanced.PL.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ToDoListEnhanced.PL"
+             xmlns:views="clr-namespace:ToDoListEnhanced.PL.Views"
+             xmlns:viewModels="clr-namespace:ToDoListEnhanced.PL.ViewModels"
+             Startup="App_Startup">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewModels:RegistrationViewModel}">
+                <views:RegistrationForm/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+                <views:LoginForm/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:MainWorkspaceViewModel}">
+                <views:MainWorkspace/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

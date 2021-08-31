@@ -27,7 +27,12 @@ namespace ToDoListEnhanced.BLL.Services
         {
             using (var client = HttpClientService.CreateClient(accessToken))
             {
-                await client.PostAsJsonAsync($@"https://localhost:44338/api/SubTasks/Create", subTaskDto);
+                var response = await client.PostAsJsonAsync($@"https://localhost:44338/api/SubTasks/Create", subTaskDto);
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    var message = await response.Content.ReadAsStringAsync();
+                    throw new Exception(message);
+                }
             }
         }
 
@@ -35,7 +40,12 @@ namespace ToDoListEnhanced.BLL.Services
         {
             using (var client = HttpClientService.CreateClient(accessToken))
             {
-                await client.PutAsJsonAsync($@"https://localhost:44338/api/SubTasks/Update", subTaskDto);
+                var response = await client.PutAsJsonAsync($@"https://localhost:44338/api/SubTasks/Update", subTaskDto);
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    var message = await response.Content.ReadAsStringAsync();
+                    throw new Exception(message);
+                }
             }
         }
 
@@ -43,7 +53,12 @@ namespace ToDoListEnhanced.BLL.Services
         {
             using (var client = HttpClientService.CreateClient(accessToken))
             {
-                await client.DeleteAsync($@"https://localhost:44338/api/SubTasks/Delete/{subTaskDTO.Id}");
+                var response = await client.DeleteAsync($@"https://localhost:44338/api/SubTasks/Delete/{subTaskDTO.Id}");
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    var message = await response.Content.ReadAsStringAsync();
+                    throw new Exception(message);
+                }
             }
         }
     }

@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ToDoListEnhanced.BLL.DTO;
-using ToDoListEnhanced.DAL.Entities;
-using ToDoListEnhanced.DAL.Interfaces;
+using ToDoListEnhanced.WebBLL.DTO;
+using ToDoListEnhanced.WebBLL.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,20 +15,11 @@ namespace ToDoListEnhanced.WebAPI.Controllers
     [ApiController]
     public class SubTasksController : ControllerBase
     {
-        IUnitOfWork Database;
+        private IDataService<SubTaskDTO> _subTaskService;
 
-        public SubTasksController(IUnitOfWork database)
+        public SubTasksController(IDataService<SubTaskDTO> subTaskService)
         {
-            Database = database;
-        }
-
-        // GET: api/<SubTasksController>
-        [AllowAnonymous]
-        [HttpGet("Get")]
-        public async Task<ICollection<SubTaskDTO>> Get()
-        {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<SubTask, SubTaskDTO>()).CreateMapper();
-            return mapper.Map<ICollection<SubTask>, List<SubTaskDTO>>(await Database.SubTasks.GetAll());
+            _subTaskService = subTaskService;
         }
 
         // GET api/<SubTasksController>/5
@@ -37,8 +27,7 @@ namespace ToDoListEnhanced.WebAPI.Controllers
         [HttpGet("Get/{id}")]
         public async Task<ICollection<SubTaskDTO>> Get(Guid id)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<SubTask, SubTaskDTO>()).CreateMapper();
-            return mapper.Map<ICollection<SubTask>, List<SubTaskDTO>>(await Database.SubTasks.Find(item => item.ProjectId == id));
+            return await _subTaskService.Get(id);
         }
 
         // POST api/<SubTasksController>
@@ -46,36 +35,35 @@ namespace ToDoListEnhanced.WebAPI.Controllers
         [HttpPost("Create")]
         public void Post([FromBody] SubTaskDTO subTaskDto)
         {
-            SubTask subTask = new SubTask
-            {
-                Id = subTaskDto.Id,
-                SubTaskName = subTaskDto.SubTaskName,
-                Description = subTaskDto.Description,
-                Status = subTaskDto.Status,
-                ProjectId = subTaskDto.ProjectId
-            };
-            Database.SubTasks.Create(subTask);
-            Database.SaveAsync();
+            //if (Database.Projects.Get(subTaskDto.ProjectId).UserId == Guid.Parse(this.User.Identity.Name.Split('.')[0]))
+            //{
+                _subTaskService.Create(subTaskDto);
+            //}
+            //else this.BadRequest("У вас нет прав на это действие.");
         }
 
         // PUT api/<SubTasksController>/5
+        [Authorize]
         [HttpPut("Update")]
         public void Put([FromBody] SubTaskDTO subTaskDto)
         {
-            SubTask subTask = Database.SubTasks.Get(subTaskDto.Id);
-            subTask.SubTaskName = subTaskDto.SubTaskName;
-            subTask.Description = subTaskDto.Description;
-            subTask.Status = subTaskDto.Status;
-            Database.SubTasks.Update(subTask);
-            Database.SaveAsync();
+            //if (Database.Projects.Get(subTaskDto.ProjectId).UserId == Guid.Parse(this.User.Identity.Name.Split('.')[0]))
+            //{
+                _subTaskService.Update(subTaskDto);
+            //}
+            //else this.BadRequest("У вас нет прав на это действие.");
         }
 
         // DELETE api/<SubTasksController>/5
+        [Authorize]
         [HttpDelete("Delete/{id}")]
         public void Delete(Guid id)
         {
-            Database.SubTasks.Delete(id);
-            Database.SaveAsync();
+            //if (Database.Projects.Get(Database.SubTasks.Get(id).ProjectId).UserId == Guid.Parse(this.User.Identity.Name.Split('.')[0]))
+            //{
+                _subTaskService.Delete(id);
+            //}
+            //else this.BadRequest("У вас нет прав на это действие.");
         }
     }
 }

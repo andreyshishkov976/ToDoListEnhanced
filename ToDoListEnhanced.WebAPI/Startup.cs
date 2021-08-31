@@ -11,6 +11,9 @@ using ToDoListEnhanced.DAL.EF;
 using ToDoListEnhanced.DAL.Interfaces;
 using ToDoListEnhanced.DAL.Repositories;
 using ToDoListEnhanced.WebAPI.Authentication;
+using ToDoListEnhanced.WebBLL.DTO;
+using ToDoListEnhanced.WebBLL.Interfaces;
+using ToDoListEnhanced.WebBLL.Services;
 
 namespace ToDoListEnhanced.WebAPI
 {
@@ -52,6 +55,9 @@ namespace ToDoListEnhanced.WebAPI
                     });
             services.AddDbContext<ToDoListContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
+            services.AddTransient<IDataService<ProjectDTO>, ProjectService>();
+            services.AddTransient<IDataService<SubTaskDTO>, SubTaskService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

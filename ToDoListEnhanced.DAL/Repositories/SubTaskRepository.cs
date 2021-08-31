@@ -20,15 +20,16 @@ namespace ToDoListEnhanced.DAL.Repositories
 
         public void Create(SubTask item)
         {
-            //_context.SubTasks.Add(item);
-            _context.Entry(item).State = EntityState.Added;
+            _context.SubTasks.Add(item);
+            //_context.Entry(item).State = EntityState.Added;
         }
 
         public void Delete(Guid id)
         {
             SubTask item = _context.SubTasks.Find(id);
             if (item != null)
-                _context.Entry(item).State = EntityState.Deleted;
+                //_context.Entry(item).State = EntityState.Deleted;
+                _context.SubTasks.Remove(item);
         }
 
         public async Task<ICollection<SubTask>> Find(Func<SubTask, bool> predicate)
@@ -48,7 +49,8 @@ namespace ToDoListEnhanced.DAL.Repositories
 
         public void Update(SubTask item)
         {
-            _context.Entry(item).State = EntityState.Modified;
+            _context.SubTasks.Update(item);
+            //_context.Entry(item).State = EntityState.Modified;
         }
     }
 }

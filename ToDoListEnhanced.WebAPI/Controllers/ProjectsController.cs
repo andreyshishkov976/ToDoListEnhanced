@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ToDoListEnhanced.BLL.DTO;
-using ToDoListEnhanced.DAL.Entities;
-using ToDoListEnhanced.DAL.Interfaces;
+using ToDoListEnhanced.WebBLL.DTO;
+using ToDoListEnhanced.WebBLL.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,20 +15,11 @@ namespace ToDoListEnhanced.WebAPI.Controllers
     [ApiController]
     public class ProjectsController : ControllerBase
     {
-        IUnitOfWork Database;
+        private IDataService<ProjectDTO> _projectService;
 
-        public ProjectsController(IUnitOfWork database)
+        public ProjectsController(IDataService<ProjectDTO> projectService/*IUnitOfWork database*/)
         {
-            Database = database;
-        }
-
-        // GET api/<ProjectsController>
-        [AllowAnonymous]
-        [HttpGet("Get")]
-        public async Task<ICollection<ProjectDTO>> Get()
-        {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDTO>()).CreateMapper();
-            return mapper.Map<ICollection<Project>, List<ProjectDTO>>(await Database.Projects.GetAll());
+            _projectService = projectService;
         }
 
         // GET: api/<ProjectsController>/{userId}
@@ -37,8 +27,7 @@ namespace ToDoListEnhanced.WebAPI.Controllers
         [HttpGet("Get/{id}")]
         public async Task<ICollection<ProjectDTO>> Get(Guid id)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDTO>()).CreateMapper();
-            return mapper.Map<ICollection<Project>, List<ProjectDTO>>(await Database.Projects.Find(item => item.UserId == id));
+            return await _projectService.Get(id);
         }
 
         // POST api/<ProjectsController>
@@ -46,17 +35,11 @@ namespace ToDoListEnhanced.WebAPI.Controllers
         [HttpPost("Create")]
         public void Post([FromBody] ProjectDTO projectDto)
         {
-            Project project = new Project
-            {
-                Id = projectDto.Id,
-                ProjectName = projectDto.ProjectName,
-                Description = projectDto.Description,
-                Status = projectDto.Status,
-                UserId = projectDto.UserId,
-                SubTasks = new List<SubTask>()
-            };
-            Database.Projects.Create(project);
-            Database.SaveAsync();
+            //if (projectDto.UserId == Guid.Parse(this.User.Identity.Name.Split('.')[0]))
+            //{
+            _projectService.Create(projectDto);
+            //}
+            //else this.BadRequest("У вас нет прав на это действие.");
         }
 
         // PUT api/<ProjectsController>/5
@@ -64,12 +47,11 @@ namespace ToDoListEnhanced.WebAPI.Controllers
         [HttpPut("Update")]
         public void Put([FromBody] ProjectDTO projectDto)
         {
-            Project project = Database.Projects.Get(projectDto.Id);
-            project.ProjectName = projectDto.ProjectName;
-            project.Description = projectDto.Description;
-            project.Status = projectDto.Status;
-            Database.Projects.Update(project);
-            Database.SaveAsync();
+            //if (projectDto.UserId == Guid.Parse(this.User.Identity.Name.Split('.')[0]))
+            //{
+            _projectService.Update(projectDto);
+            //}
+            //else this.BadRequest("У вас нет прав на это действие.");
         }
 
         // DELETE api/<ProjectsController>/5
@@ -77,8 +59,11 @@ namespace ToDoListEnhanced.WebAPI.Controllers
         [HttpDelete("Delete/{id}")]
         public void Delete(Guid id)
         {
-            Database.Projects.Delete(id);
-            Database.SaveAsync();
-        }
+            //if (Database.Projects.Get(id).UserId == Guid.Parse(this.User.Identity.Name.Split('.')[0]))
+            //{
+                _projectService.Delete(id);
+            //}
+            //else this.BadRequest("У вас нет прав на это действие.");
+        } 
     }
 }

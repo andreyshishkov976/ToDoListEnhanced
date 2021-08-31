@@ -8,10 +8,9 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using ToDoListEnhanced.BLL.DTO;
-using ToDoListEnhanced.DAL.Entities;
-using ToDoListEnhanced.DAL.Interfaces;
 using ToDoListEnhanced.WebAPI.Authentication;
+using ToDoListEnhanced.WebBLL.DTO;
+using ToDoListEnhanced.WebBLL.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,13 +20,11 @@ namespace ToDoListEnhanced.WebAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        IUnitOfWork Database;
-        private IPasswordHasher<UserDTO> _passwordHasher;
+        private IUserService _userService;
 
-        public UsersController(IUnitOfWork database)
+        public UsersController(IUserService userService)
         {
-            Database = database;
-            _passwordHasher = new PasswordHasher<UserDTO>();
+            _userService = userService;
         }
 
         // GET: api/<UsersController>
@@ -35,22 +32,20 @@ namespace ToDoListEnhanced.WebAPI.Controllers
         [HttpGet("Get")]
         public async Task<ICollection<UserDTO>> GetAll()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()).CreateMapper();
-            return mapper.Map<ICollection<User>, List<UserDTO>>(await Database.Users.GetAll());
+            return await _userService.Get();
         }
 
         [AllowAnonymous]
         [HttpGet("Get/{login}")]
         public async Task<ICollection<UserDTO>> GetByLogin(string login)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()).CreateMapper();
-            return mapper.Map<ICollection<User>, List<UserDTO>>(await Database.Users.Find(item => item.Login == login));
+            return await _userService.Get(login);
         }
 
         [HttpPost("Authorize/{login}&{password}")]
         public async Task<IActionResult> Token(string login, string password)
         {
-            var identity = await GetIdentity(login, password);
+            var identity = await _userService.Authorize(login,password);
             if (identity == null)
             {
                 return BadRequest(new { errorText = "Неверный логин или пароль." });
@@ -73,57 +68,12 @@ namespace ToDoListEnhanced.WebAPI.Controllers
             return new JsonResult(response);
         }
 
-        private async Task<ClaimsIdentity> GetIdentity(string login, string password)
-        {
-            UserDTO authorizedUser = null;
-            var users = await GetByLogin(login);
-            if (users == null)
-                return null;
-            else
-            {
-                PasswordVerificationResult verificationResult;
-                foreach (var user in users)
-                {
-                    verificationResult = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
-                    if (verificationResult == PasswordVerificationResult.Success)
-                    {
-                        authorizedUser = user;
-                        break;
-                    }
-                }
-            }
-            if (authorizedUser != null)
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, $@"{authorizedUser.Id}.{authorizedUser.LastName} {authorizedUser.FirstName} {authorizedUser.SurName}"),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, authorizedUser.Login)
-                };
-                ClaimsIdentity claimsIdentity =
-                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                    ClaimsIdentity.DefaultRoleClaimType);
-                return claimsIdentity;
-            }
-            return null;
-        }
-
         // POST api/<UsersController>
         [AllowAnonymous]
         [HttpPost("Register")]
         public void RegisterUser([FromBody] UserDTO userDto)
         {
-            User user = new User
-            {
-                Id = Guid.NewGuid(),
-                LastName = userDto.LastName,
-                FirstName = userDto.FirstName,
-                SurName = userDto.SurName,
-                Login = userDto.Login,
-                Projects = new List<Project>()
-            };
-            user.PasswordHash = _passwordHasher.HashPassword(userDto, userDto.PasswordHash);
-            Database.Users.Create(user);
-            Database.SaveAsync();
+            _userService.Create(userDto);
         }
 
         // PUT api/<UsersController>
@@ -131,14 +81,7 @@ namespace ToDoListEnhanced.WebAPI.Controllers
         [HttpPut("Update")]
         public void UpdateUser([FromBody] UserDTO userDto)
         {
-            User user = Database.Users.Get(userDto.Id);
-            user.LastName = userDto.LastName;
-            user.FirstName = userDto.FirstName;
-            user.SurName = userDto.SurName;
-            user.Login = userDto.Login;
-            user.PasswordHash = _passwordHasher.HashPassword(userDto, userDto.PasswordHash);
-            Database.Users.Update(user);
-            Database.SaveAsync();
+            _userService.Update(userDto);
         }
 
         // DELETE api/<UsersController>/5
@@ -146,8 +89,7 @@ namespace ToDoListEnhanced.WebAPI.Controllers
         [HttpDelete("Delete/{id}")]
         public void DeleteUser(Guid id)
         {
-            Database.Users.Delete(id);
-            Database.SaveAsync();
+            _userService.Delete(id);
         }
     }
 }

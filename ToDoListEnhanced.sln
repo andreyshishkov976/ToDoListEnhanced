@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListEnhanced.PL", "ToDo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListEnhanced.BLL", "ToDoListEnhanced.BLL\ToDoListEnhanced.BLL.csproj", "{6FFCFDFA-9E95-4E12-ADF0-1872AFC6EA10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListEnhanced.WebBLL", "ToDoListEnhanced.WebBLL\ToDoListEnhanced.WebBLL.csproj", "{EAF24935-9655-49AE-ACCB-1863E30EBECE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6FFCFDFA-9E95-4E12-ADF0-1872AFC6EA10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FFCFDFA-9E95-4E12-ADF0-1872AFC6EA10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FFCFDFA-9E95-4E12-ADF0-1872AFC6EA10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAF24935-9655-49AE-ACCB-1863E30EBECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAF24935-9655-49AE-ACCB-1863E30EBECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAF24935-9655-49AE-ACCB-1863E30EBECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF24935-9655-49AE-ACCB-1863E30EBECE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

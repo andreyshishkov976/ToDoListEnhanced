@@ -20,15 +20,16 @@ namespace ToDoListEnhanced.DAL.Repositories
 
         public void Create(User item)
         {
-            _context.Entry(item).State = EntityState.Added;
-            //_context.Users.Add(item);
+            //_context.Entry(item).State = EntityState.Added;
+            _context.Users.Add(item);
         }
 
         public void Delete(Guid id)
         {
             User item = _context.Users.Find(id);
             if (item != null)
-                _context.Entry(item).State = EntityState.Deleted;
+                //_context.Entry(item).State = EntityState.Deleted;
+                _context.Users.Remove(item);
         }
 
         public async Task<ICollection<User>> Find(Func<User, bool> predicate)
@@ -48,7 +49,8 @@ namespace ToDoListEnhanced.DAL.Repositories
 
         public void Update(User item)
         {
-            _context.Entry(item).State = EntityState.Modified;
+            _context.Users.Update(item);
+            //_context.Entry(item).State = EntityState.Modified;
         }
     }
 }

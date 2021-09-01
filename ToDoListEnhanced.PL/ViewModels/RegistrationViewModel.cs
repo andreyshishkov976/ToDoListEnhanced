@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using ToDoListEnhanced.BLL.DTO;
-using ToDoListEnhanced.BLL.Infrastructure;
-using ToDoListEnhanced.BLL.Interfaces;
+using ToDoListEnhanced.ClientBLL.DTO;
+using ToDoListEnhanced.ClientBLL.Infrastructure;
+using ToDoListEnhanced.ClientBLL.Interfaces;
 using ToDoListEnhanced.PL.Util;
 using ToDoListEnhanced.PL.ViewModels.Commands;
 
@@ -28,9 +28,9 @@ namespace ToDoListEnhanced.PL.ViewModels
             }
         }
 
-        private IUserService _userService;
+        private IUserWebService _userService;
 
-        public RegistrationViewModel(IUserService userService)
+        public RegistrationViewModel(IUserWebService userService)
         {
 
             IsSubmitEnabled = false;

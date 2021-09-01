@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoListEnhanced.DAL.Entities;
 using ToDoListEnhanced.DAL.Interfaces;
-using ToDoListEnhanced.WebBLL.DTO;
-using ToDoListEnhanced.WebBLL.Interfaces;
+using ToDoListEnhanced.ApiBLL.DTO;
+using ToDoListEnhanced.ApiBLL.Interfaces;
 
-namespace ToDoListEnhanced.WebBLL.Services
+namespace ToDoListEnhanced.ApiBLL.Services
 {
     public class ProjectService : IDataService<ProjectDTO>
     {

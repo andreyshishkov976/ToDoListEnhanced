@@ -1,7 +1,7 @@
 ﻿using Ninject.Modules;
-using ToDoListEnhanced.BLL.DTO;
-using ToDoListEnhanced.BLL.Interfaces;
-using ToDoListEnhanced.BLL.Services;
+using ToDoListEnhanced.ClientBLL.DTO;
+using ToDoListEnhanced.ClientBLL.Interfaces;
+using ToDoListEnhanced.ClientBLL.WebServices;
 
 namespace ToDoListEnhanced.PL.Util
 {
@@ -9,9 +9,9 @@ namespace ToDoListEnhanced.PL.Util
     {
         public override void Load()
         {
-            Bind<IDataService<ProjectDTO>>().To<ProjectService>();
-            Bind<IDataService<SubTaskDTO>>().To<SubTaskService>();
-            Bind<IUserService>().To<UserService>();
+            Bind<IDataWebService<ProjectDTO>>().To<ProjectWebService>();
+            Bind<IDataWebService<SubTaskDTO>>().To<SubTaskWebService>();
+            Bind<IUserWebService>().To<UserWebService>();
         }
     }
 }

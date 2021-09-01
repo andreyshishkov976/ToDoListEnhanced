@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ToDoListEnhanced.WebBLL\ToDoListEnhanced.WebBLL.csproj" />
+    <ProjectReference Include="..\ToDoListEnhanced.WebBLL\ToDoListEnhanced.ApiBLL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace ToDoListEnhanced.BLL.Services
+namespace ToDoListEnhanced.ClientBLL.WebServices
 {
     public static class HttpClientService
     {

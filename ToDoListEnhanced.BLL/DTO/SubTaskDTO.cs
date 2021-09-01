@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ToDoListEnhanced.BLL.DTO
+namespace ToDoListEnhanced.ClientBLL.DTO
 {
     public class SubTaskDTO
     {

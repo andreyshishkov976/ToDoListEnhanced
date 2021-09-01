@@ -11,9 +11,9 @@ using ToDoListEnhanced.DAL.EF;
 using ToDoListEnhanced.DAL.Interfaces;
 using ToDoListEnhanced.DAL.Repositories;
 using ToDoListEnhanced.WebAPI.Authentication;
-using ToDoListEnhanced.WebBLL.DTO;
-using ToDoListEnhanced.WebBLL.Interfaces;
-using ToDoListEnhanced.WebBLL.Services;
+using ToDoListEnhanced.ApiBLL.DTO;
+using ToDoListEnhanced.ApiBLL.Interfaces;
+using ToDoListEnhanced.ApiBLL.Services;
 
 namespace ToDoListEnhanced.WebAPI
 {

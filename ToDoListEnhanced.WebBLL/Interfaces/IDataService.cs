@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToDoListEnhanced.WebBLL.Interfaces
+namespace ToDoListEnhanced.ApiBLL.Interfaces
 {
     public interface IDataService<T> where T : class
     {

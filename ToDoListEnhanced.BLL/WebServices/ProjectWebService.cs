@@ -3,14 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using ToDoListEnhanced.BLL.DTO;
-using ToDoListEnhanced.BLL.Interfaces;
+using ToDoListEnhanced.ClientBLL.DTO;
+using ToDoListEnhanced.ClientBLL.Interfaces;
 
-namespace ToDoListEnhanced.BLL.Services
+namespace ToDoListEnhanced.ClientBLL.WebServices
 {
-    public class ProjectService : IDataService<ProjectDTO>
+    public class ProjectWebService : IDataWebService<ProjectDTO>
     {
-        public ProjectService()
+        public ProjectWebService()
         { }
 
         public async Task<ICollection<ProjectDTO>> Get(Guid? id, string accessToken)

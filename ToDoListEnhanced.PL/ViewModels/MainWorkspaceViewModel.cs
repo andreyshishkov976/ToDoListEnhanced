@@ -6,8 +6,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using ToDoListEnhanced.BLL.DTO;
-using ToDoListEnhanced.BLL.Interfaces;
+using ToDoListEnhanced.ClientBLL.DTO;
+using ToDoListEnhanced.ClientBLL.Interfaces;
 using ToDoListEnhanced.PL.Models;
 using ToDoListEnhanced.PL.Util;
 using ToDoListEnhanced.PL.ViewModels.Commands;
@@ -16,10 +16,10 @@ namespace ToDoListEnhanced.PL.ViewModels
 {
     public class MainWorkspaceViewModel : BaseViewModel
     {
-        private IDataService<ProjectDTO> _projectService;
-        private IDataService<SubTaskDTO> _subTaskService;
+        private IDataWebService<ProjectDTO> _projectService;
+        private IDataWebService<SubTaskDTO> _subTaskService;
 
-        public MainWorkspaceViewModel(IDataService<ProjectDTO> projectService, IDataService<SubTaskDTO> subTaskService)
+        public MainWorkspaceViewModel(IDataWebService<ProjectDTO> projectService, IDataWebService<SubTaskDTO> subTaskService)
         {
             _projectService = projectService;
             _subTaskService = subTaskService;

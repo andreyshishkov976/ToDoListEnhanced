@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ToDoListEnhanced.BLL.Infrastructure
+namespace ToDoListEnhanced.ClientBLL.Infrastructure
 {
     public class AuthentificationException : Exception
     {

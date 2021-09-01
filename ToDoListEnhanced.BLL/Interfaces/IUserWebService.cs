@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ToDoListEnhanced.BLL.DTO;
+using ToDoListEnhanced.ClientBLL.DTO;
 
-namespace ToDoListEnhanced.BLL.Interfaces
+namespace ToDoListEnhanced.ClientBLL.Interfaces
 {
-    public interface IUserService
+    public interface IUserWebService
     {
         Task RegisterUser(UserDTO userDto);
         Task<Dictionary<string, string>> AuthorizeUser(string login, string password);

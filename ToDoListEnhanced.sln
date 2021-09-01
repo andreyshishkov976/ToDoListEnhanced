@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListEnhanced.WebAPI", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListEnhanced.PL", "ToDoListEnhanced.PL\ToDoListEnhanced.PL.csproj", "{C90302FF-F0C3-455D-B8F7-AF5E388F1336}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListEnhanced.BLL", "ToDoListEnhanced.BLL\ToDoListEnhanced.BLL.csproj", "{6FFCFDFA-9E95-4E12-ADF0-1872AFC6EA10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListEnhanced.ClientBLL", "ToDoListEnhanced.BLL\ToDoListEnhanced.ClientBLL.csproj", "{6FFCFDFA-9E95-4E12-ADF0-1872AFC6EA10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListEnhanced.WebBLL", "ToDoListEnhanced.WebBLL\ToDoListEnhanced.WebBLL.csproj", "{EAF24935-9655-49AE-ACCB-1863E30EBECE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListEnhanced.ApiBLL", "ToDoListEnhanced.WebBLL\ToDoListEnhanced.ApiBLL.csproj", "{EAF24935-9655-49AE-ACCB-1863E30EBECE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

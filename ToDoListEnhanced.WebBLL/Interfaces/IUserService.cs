@@ -4,9 +4,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using ToDoListEnhanced.WebBLL.DTO;
+using ToDoListEnhanced.ApiBLL.DTO;
 
-namespace ToDoListEnhanced.WebBLL.Interfaces
+namespace ToDoListEnhanced.ApiBLL.Interfaces
 {
     public interface IUserService
     {

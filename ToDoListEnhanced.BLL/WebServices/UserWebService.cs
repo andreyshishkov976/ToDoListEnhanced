@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using ToDoListEnhanced.BLL.DTO;
-using ToDoListEnhanced.BLL.Infrastructure;
-using ToDoListEnhanced.BLL.Interfaces;
+using ToDoListEnhanced.ClientBLL.DTO;
+using ToDoListEnhanced.ClientBLL.Infrastructure;
+using ToDoListEnhanced.ClientBLL.Interfaces;
 
-namespace ToDoListEnhanced.BLL.Services
+namespace ToDoListEnhanced.ClientBLL.WebServices
 {
-    public class UserService : IUserService
+    public class UserWebService : IUserWebService
     {
-        public UserService()
+        public UserWebService()
         { }
 
         public async Task RegisterUser(UserDTO userDto)

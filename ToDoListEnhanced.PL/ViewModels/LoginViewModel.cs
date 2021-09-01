@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using ToDoListEnhanced.BLL.Infrastructure;
-using ToDoListEnhanced.BLL.Interfaces;
+using ToDoListEnhanced.ClientBLL.Infrastructure;
+using ToDoListEnhanced.ClientBLL.Interfaces;
 using ToDoListEnhanced.PL.Util;
 using ToDoListEnhanced.PL.ViewModels.Commands;
 
@@ -10,9 +10,9 @@ namespace ToDoListEnhanced.PL.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        private IUserService _userService;
+        private IUserWebService _userService;
 
-        public LoginViewModel(IUserService userService)
+        public LoginViewModel(IUserWebService userService)
         {
             _userService = userService;
             LogInCommand = new DelegateCommand(LogIn);

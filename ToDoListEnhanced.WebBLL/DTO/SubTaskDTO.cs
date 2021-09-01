@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ToDoListEnhanced.WebBLL.DTO
+namespace ToDoListEnhanced.ApiBLL.DTO
 {
     public class SubTaskDTO
     {
